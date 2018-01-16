@@ -12,7 +12,7 @@ class PMineAPI {
     private $url = "https://pmine.ru/api/method/";
     public function method($method, $params){
         $result =  json_decode($this->curl_get_contents($this->url.$method."?". http_build_query($params)), true);
-        if(is_null($result){
+        if(is_null($result)){
             $result = [];
             $result['error'] = "Failed to connect to pmine Server";
         }
