@@ -19,7 +19,7 @@ class Updater {
     public function update(){
         if(is_dir($this->filepath)){
             $data = (new PMineAPI())->method("plugin.getLastVersion", ['plugin_id' => $this->plugin_id]);
-            if(isset($data['error']){
+            if(isset($data['error'])){
                 $this->owner->getLogger()->error($data['error']);
                 return;
             }
