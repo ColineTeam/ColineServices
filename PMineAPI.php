@@ -11,7 +11,12 @@ namespace ColineServices;
 class PMineAPI {
     private $url = "https://pmine.ru/api/method/";
     public function method($method, $params){
-        return json_decode($this->curl_get_contents($this->url.$method."?". http_build_query($params)), true);
+        $result =  json_decode($this->curl_get_contents($this->url.$method."?". http_build_query($params)), true);
+        if(is_null($result){
+            $result = [];
+            $result['error'] = "Failed to connect to pmine Server";
+        }
+           return $result;
     }
     public function curl_get_contents($url){
         $curl = curl_init($url);
