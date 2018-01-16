@@ -19,6 +19,10 @@ class Updater {
     public function update(){
         if(is_dir($this->filepath)){
             $data = (new PMineAPI())->method("plugin.getLastVersion", ['plugin_id' => $this->plugin_id]);
+            if(isset($data['error']){
+                $this->owner->getLogger()->error($data['error']);
+                return;
+            }
             if($data['plugin_data']["version"] != $this->owner->getDescription()->getVersion()){
                 foreach(glob("plugins/*".$this->owner->getDescription()->getName()."*.phar") as $phar){
                     unlink($phar);
